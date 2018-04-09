@@ -1,4 +1,4 @@
-(ns daily-programmer.easy_355_alphabet_cipher
+(ns daily-programmer.easy-355-alphabet-cipher
   "https://www.reddit.com/r/dailyprogrammer/comments/879u8b/20180326_challenge_355_easy_alphabet_cipher/"
   )
 
