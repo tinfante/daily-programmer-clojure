@@ -55,9 +55,20 @@
      distances
      )))
 
-;; TODO. select key with lowest value from output of
-;; (all-vs-all-distance (leave-one-out-combinatorial "3\nqwe\nasd\nzxc") hamming-distance)
-;; Method. Recur over map, if distance is less than current min distance,
-;; overwrite min sequence. If distance is larger, continue without doing
-;; anything. If distance is the same. Add sequence to vector of min distance
-;; sequences.
+
+(defn easy-353
+  ([summed-cross-distance-map]
+   (let [[sequence- summed-distance] (first summed-cross-distance-map)]
+     (easy-353
+       (rest summed-cross-distance-map)
+       summed-distance
+       [sequence-]
+       )
+     )
+   )
+  ([rest-summed-cross-distance-map
+    min-summed-cross-distance
+    min-summed-cross-distance-sequence-vector]
+   (println rest-summed-cross-distance-map min-summed-cross-distance min-summed-cross-distance-sequence-vector)
+   )
+  )
