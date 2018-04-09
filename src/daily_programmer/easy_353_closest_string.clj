@@ -57,18 +57,81 @@
 
 
 (defn easy-353
-  ([summed-cross-distance-map]
-   (let [[sequence- summed-distance] (first summed-cross-distance-map)]
+  ([summed-cross-distance]
+   (let [[sequence- summed-distance] (first summed-cross-distance)]
      (easy-353
-       (rest summed-cross-distance-map)
+       (rest summed-cross-distance)
        summed-distance
        [sequence-]
-       )
-     )
-   )
-  ([rest-summed-cross-distance-map
+       )))
+  ([rest-summed-cross-distance
     min-summed-cross-distance
-    min-summed-cross-distance-sequence-vector]
-   (println rest-summed-cross-distance-map min-summed-cross-distance min-summed-cross-distance-sequence-vector)
-   )
+    min-distance-sequences]
+   (if (empty? rest-summed-cross-distance)
+     min-distance-sequences
+     (cond
+       (< (last (first rest-summed-cross-distance)) min-summed-cross-distance)
+         (easy-353 (rest rest-summed-cross-distance)
+                   (last (first rest-summed-cross-distance))
+                   [(first (first rest-summed-cross-distance))]
+                   )
+       ; Improvement over requirements specified for challange. This allows
+       ; returning several sequences if they all have min cross-distance.
+       ; This means return value is a vector, not a sequence string.
+       (= (last (first rest-summed-cross-distance)) min-summed-cross-distance)
+         (easy-353 (rest rest-summed-cross-distance)
+                   min-summed-cross-distance
+                   (conj min-distance-sequences (first (first rest-summed-cross-distance)))
+                   )
+       :default
+         (easy-353 (rest rest-summed-cross-distance)
+                   min-summed-cross-distance
+                   min-distance-sequences
+                   )))))
+
+
+(def challange-input-1
+"11
+AACACCCTATA
+CTTCATCCACA
+TTTCAATTTTC
+ACAATCAAACC
+ATTCTACAACT
+ATTCCTTATTC
+ACTTCTCTATT
+TAAAACTCACC
+CTTTTCCCACC
+ACCTTTTCTCA
+TACCACTACTT"  
+)
+
+(def challange-input-2
+"21
+ACAAAATCCTATCAAAAACTACCATACCAAT
+ACTATACTTCTAATATCATTCATTACACTTT
+TTAACTCCCATTATATATTATTAATTTACCC
+CCAACATACTAAACTTATTTTTTAACTACCA
+TTCTAAACATTACTCCTACACCTACATACCT
+ATCATCAATTACCTAATAATTCCCAATTTAT
+TCCCTAATCATACCATTTTACACTCAAAAAC
+AATTCAAACTTTACACACCCCTCTCATCATC
+CTCCATCTTATCATATAATAAACCAAATTTA
+AAAAATCCATCATTTTTTAATTCCATTCCTT
+CCACTCCAAACACAAAATTATTACAATAACA
+ATATTTACTCACACAAACAATTACCATCACA
+TTCAAATACAAATCTCAAAATCACCTTATTT
+TCCTTTAACAACTTCCCTTATCTATCTATTC
+CATCCATCCCAAAACTCTCACACATAACAAC
+ATTACTTATACAAAATAACTACTCCCCAATA
+TATATTTTAACCACTTACCAAAATCTCTACT
+TCTTTTATATCCATAAATCCAACAACTCCTA
+CTCTCAAACATATATTTCTATAACTCTTATC
+ACAAATAATAAAACATCCATTTCATTCATAA
+CACCACCAAACCTTATAATCCCCAACCACAC"  
+)
+
+(defn main-
+  []
+  (println (easy-353 (all-vs-all-distance (leave-one-out-combinatorial challange-input-1) hamming-distance)))
+  (println (easy-353 (all-vs-all-distance (leave-one-out-combinatorial challange-input-2) hamming-distance)))
   )
