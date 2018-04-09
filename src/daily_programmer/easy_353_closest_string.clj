@@ -41,5 +41,23 @@
 
 (defn all-vs-all-distance
   [combinatorial-map distance-func]
-  
-  )
+  (loop [combs combinatorial-map
+         distances {}]
+   (if (not (empty? combs))
+     (recur
+       (rest combs)
+       (conj distances
+             {((first combs) 0)
+              (reduce + (map
+                          #(distance-func ((first combs) 0) %)
+                          ((first combs) 1)))}
+             ))
+     distances
+     )))
+
+;; TODO. select key with lowest value from output of
+;; (all-vs-all-distance (leave-one-out-combinatorial "3\nqwe\nasd\nzxc") hamming-distance)
+;; Method. Recur over map, if distance is less than current min distance,
+;; overwrite min sequence. If distance is larger, continue without doing
+;; anything. If distance is the same. Add sequence to vector of min distance
+;; sequences.
