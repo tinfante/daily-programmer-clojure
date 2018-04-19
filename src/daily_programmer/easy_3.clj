@@ -7,29 +7,24 @@
 
 (def message "hola, mundo cruel!")
 
-(defn caesar-shift
-  [character amount]
-  (let [shifted_index (+ (.indexOf alphabet character) amount)]
-    (if (> shifted_index (dec (count alphabet)))
-      (get alphabet (- shifted_index (count alphabet)))
-      (get alphabet shifted_index)
-      )))
-
-(defn caesar-unshift
-  [character amount]
-  (let [shifted_index (- (.indexOf alphabet character) amount)]
-    (if (<= shifted_index 0)
-      (get alphabet (+ shifted_index (count alphabet)))
-      (get alphabet shifted_index)
-      )))
+(defn caesar-cipher
+  [character amount add-sub-fn]
+  (let [shifted_index (add-sub-fn (.indexOf alphabet character) amount)]
+    (cond (>= shifted_index (count alphabet))
+          (get alphabet (- shifted_index (count alphabet)))
+          (<= shifted_index 0)
+          (get alphabet (+ shifted_index (count alphabet)))
+          :default (get alphabet shifted_index)
+          )))
 
 (defn rot13
   [message option]
   (let [chars- (str-/split message #"")]
-    (cond (= option :encode) (str-/join "" (map #(caesar-shift % 13) chars-))
-          (= option :decode) (str-/join "" (map #(caesar-unshift % 13) chars-))
+    (cond (= option :encode)
+          (str-/join "" (map #(caesar-cipher % 13 +) chars-))
+          (= option :decode)
+          (str-/join "" (map #(caesar-cipher % 13 -) chars-))
     )))
-    
 
 (defn easy-3
   []
