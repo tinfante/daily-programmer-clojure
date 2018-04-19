@@ -3,7 +3,7 @@
   ;(use daily-programmer.easy-355-alphabet-cipher)
   ;(use daily-programmer.easy-353-closest-string)
   ;(use daily-programmer.easy-1)
-  (use daily-programmer.easy-2)
+  (use daily-programmer.easy-3)
   )
 
 (defn -main
@@ -11,5 +11,5 @@
   ;(easy-355)
   ;(easy-353)
   ;(easy-1)
-  (easy-2)
+  (easy-3)
   )

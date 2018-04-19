@@ -1,5 +1,5 @@
-(ns daily-programmer.easy-2
-  "https://www.reddit.com/r/dailyprogrammer/comments/pih8x/easy_challenge_1/"
+(ns daily-programmer.easy-3
+  "https://www.reddit.com/r/dailyprogrammer/comments/pkw2m/2112012_challenge_3_easy/"
   (:require [clojure.string :as str-])
   )
 
@@ -31,7 +31,7 @@
     )))
     
 
-(defn easy-2
+(defn easy-3
   []
   (let [encoded-msg (rot13 message :encode)]
     (println "message:" message)
