@@ -17,5 +17,5 @@
     (.mkdir (io/file "src/daily_programmer/output")))
   (spit
     "src/daily_programmer/output/easy-1.txt"
-    (str "name: " name- "\nage: " age "\nusername: " uname )
+    (str "name: " name- "\nage: " age "\nusername: " uname "\n")
     ))
